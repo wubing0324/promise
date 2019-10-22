@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>peomise第四天</title>
+</head>
+<body>
+  <script src="./promise.js"></script>
+  <script>
+    var getUserId = function(){
+      return new PromiseNs(function (resolve, reject) {
+        setTimeout(function(){
+          return resolve('id2');
+        }, 2000)
+      });
+    }
+    var getUserJob = function(id){
+      console.log(id)
+      return new PromiseNs(function (resolve, reject) {
+        setTimeout(function(){
+          return resolve('job2');
+        }, 2000)
+      });
+    }
+    debugger
+    // getUserId().then(getUserJob).then(function(job){console.log(job)})
+    getUserId().then(getUserJob).then(function(job){console.log(job)}).then(function(){console.log('fuck')})
+
+    // if(!Function.prototype.softBind){
+    // 　　Function.prototype.softBind = function(obj){
+    // 　　　　var fn = this;//第一次传进来的this是方法foo
+    //         console.log(this)
+    // 　　　　var curried = [].slice.call(arguments, 1);
+    // 　　　　var bound = function(){
+    //         console.log(this)
+    // 　　　　　　return fn.apply(
+    // 　　　　　　　　(!this || this === (window || global))? //!this用于严格模式时，默认绑定到undefined，而不是window上
+    // 　　　　　　　　obj: this, //此处如果写死成obj，则是硬绑定，效果同bind方法
+    // // 　　　　　　　　curried.concat.apply(curried, arguments)
+    //                 arguments
+    // 　　　　　　);
+    // 　　　　};
+    // 　　　　bound.prototype = Object.create(fn.prototype);
+    // 　　　　return bound;
+    // 　　};
+    // }
+
+    // function foo(a, b) {
+    // 　　console.log("name: " + this.name);
+    // 　　console.log("num: " + (a + b));
+    // }
+
+    // var obj1 = {name: "obj1"},
+    // obj2 = {name: "obj2"},
+    // obj3 = {name: "obj3"};
+
+    // var fooOBJ = foo.softBind(obj1);
+
+    // console.log(fooOBJ())
+    // // obj2.foo=foo.softBind(obj1);
+    // // obj2.foo();
+    // var foo1=foo.softBind(obj1);
+    // foo1(5,6);
+  </script>
+</body>
+</html>
